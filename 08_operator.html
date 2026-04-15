@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1. 할당연산자(산술 - 이항)
+      let x = 1;
+      let y = 3;
+      x = x + y;
+      console.log(y); //3
+      console.log(x); //4
+      x = x - y;
+      console.log(x); //1
+      x = x * y;
+      console.log(x); //3
+      x = x / y;
+      console.log(x); //1
+      x = 2;
+      y = 3;
+      x = x % y;
+      console.log(x); //2
+      x = x ** y;
+      console.log(x); //1 1의 3승
+
+      //2. 복합할당연산자
+      x = 3;
+      y = 5;
+      console.log((x += y)); //8 x=x+y
+      console.log((x -= y)); //3 x=x-y
+      console.log((x *= y)); //15 x=x*y
+      console.log((x /= y)); // 3 x=x/y
+      console.log((x %= y)); // 3 x=x%y
+
+      //3. 비교연산자 : == ===, != !==
+      let a = 3;
+      let b = "3";
+      console.log(a == b); //true => 값만 비교
+      console.log(a === b); //false => 값과 타입 다 비교
+
+      //4. 산술연산자 : 단항 ++(증가) --(감소) +(숫자화) -(단항부정)
+      x = 5;
+      y = 6;
+      y = x++; //먼저 x를 1증가시키고 할당해라
+      console.log(x); //6
+      console.log(y); //5
+
+      y = x--;
+      console.log(x); //5
+      console.log(y); //6
+
+      //5. 단항부정 연산자 : 부호를 바꾼다.
+      x = -3;
+      console.log(x); //-3
+      console.log(-x); //3
+
+      //6. 숫자화 연산자
+      let z = true;
+      console.log(+z);
+      x = -"3"; //앞에 +,- 부호를 붙이면 숫자화해줌
+      y = -"5";
+      console.log(x + y);
+      //활용 : prompt로 두 수를 입력받아 합을 구하는 코드 작성
+      //효율성, 가독성, 결과 확인...후 부르기
+
+      let usernum1 = +prompt("첫번째 숫자를 입력하시오");
+      let usernum2 = +prompt("두 번째 숫자를 입력하시오");
+      console.log("두 수의 합:", usernum1 + usernum2);
+
+      //7. 논리 연산자 : 여러가지 조건을 만족시키는지 알아보는 연산자 &&(and : 둘 다 참 => 참)
+      //  || (or : 둘 중 하나만 참 => 참)
+
+      let o = true && false; //false
+      o = 3 > 2 && 4 > 7; // false
+
+      o = 3 > 2 && 8 > 7; // true
+
+      o = true || false; //true
+      o = 3 > 2 || 4 > 7; // true
+
+      o = 3 > 4 || 4 < 2 || 2 > 1; //오류? true
+      console.log(o);
+
+      //8. 문자열 연산자 : + (concate)
+      let firstName = "Jhon";
+      let lastName = "Bacon";
+      let fullName = firstName + " " + lastName;
+      console.log(fullName);
+
+      //9. 조건 삼항 연산자
+      //let 변수 = 조건 ? : 참 : 거짓
+      let age = 16;
+      let isAdult = age >= 20 ? "성인" : "미성년자";
+      console.log(isAdult);
+
+      //활용 : 90점이상이면 "A" 80점이상이면 "B"
+      //70점이상이면 "C" 60점이상이면 "D" 나머지 "E"
+
+      let score = prompt("점수를 입력하시오"); //+를 사용해서 문자열을 숫자로 바꾸고
+      let grade =
+        score >= 90
+          ? "A"
+          : score >= 80
+            ? "B"
+            : score >= 70
+              ? "C"
+              : score >= 60
+                ? "D"
+                : "E";
+
+      console.log(grade);
+    </script>
+  </body>
+</html>

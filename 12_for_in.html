@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let brands = ["애플", "구글", "아마존", "마이크로소프트", "메타"];
+      for (const i in brands) {
+        //in 뒤에는 내가 갖고오고싶은 배열이나 객체   앞에는 뭐를 갖고 오고 싶은지 변수 대부분 const
+        //i는 인덱스 => 배열에서 그다지 많이 사용하지 않는다. 순회 - iterable data 순서적으로 가는거     for in 순회가 가능하게 해줌
+        console.log(i);
+        console.log(brands[i]);
+      }
+      //for in은 객체에서 많이 사용한다.
+      let person = {
+        name: "홍길동",
+        age: 22,
+        tel: "010-0000-1111",
+        city: "Seoul",
+      };
+      // //키를 읽어오기
+      // for (const key in person) {
+      //   console.log(key); //name, age, tel, city 출력
+      // }
+      // //값을 읽어오기
+      // for (const key in person) {
+      //   console.log(person[key]);
+      // }
+
+      let value = prompt("어떤 값을 알고 싶나요?");
+      let found = false;
+
+      for (let key in person) {
+        if (key === value) {
+          console.log(person[key]);
+          found = true;
+        }
+      }
+      if (!found) {
+        console.log("존재하지 않는 키");
+      } else if (person[key] === "") {
+        console.log("빈 값");
+      }
+
+      /*let userInput = prompt("키를 입력하세요 : ");
+      if(!userInput){
+        console.log("키를 입력해야 합니다");
+      }else{
+        for(const key in person){
+          if(userInput === key){
+            console.log(userInput, ":", person[userInput]);
+            break;
+          }else{
+            console.log("적합한 키를 입력해주세요");
+          }
+        }
+      }*/
+    </script>
+  </body>
+</html>

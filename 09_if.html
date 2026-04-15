@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //나이에 따른 버스 요금 계산
+      /*6세 이하 : 무료
+       12세 미만 : 450
+       18세 미만 : 700
+       18세 이상 : 1000
+       70세 이상 : 무료
+       */
+
+      //빈칸 처리
+      //flase : flase, 0, "", null, undefined, NaN => 나머지는 true
+      let age = +prompt("나이를 입력하시오");
+      let charge = 0;
+      if (age) {
+        if (age <= 6 || age >= 70) {
+          charge = "0";
+        } else if (age < 12) {
+          charge = "450";
+        } else if (age < 18) {
+          charge = "700";
+        } else {
+          charge = "1000";
+        }
+      }
+      console.log(charge);
+
+      let x = 3; //undefined 여서 false 따라서 else 실행
+      if (!x) {
+        console.log("if 실행");
+      } else {
+        console.log("else 실행");
+      }
+    </script>
+  </body>
+</html>

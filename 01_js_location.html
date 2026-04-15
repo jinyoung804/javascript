@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트의 작성 위치</title>
+    <script>
+      document.write("Hello World-2");
+      //자바 System.out.println
+    </script>
+    <script src="./js/01_js_location.js" defer></script>
+  </head>
+  <body>
+    <!--자바스크립트의 작성 위치
+    1. <head> => 3
+    2. <body> => 2
+    3. 외부 파일 삽입 => 1
+    4. 태그사이(인라인) => 4
+    -->
+    <p>Hello World -1</p>
+    <p>졸지마!!!!</p>
+    <script>
+      document.write("Hello World -3");
+    </script>
+    <br />
+
+    <br />
+    <button onclick="functionMy()">전송</button>
+  </body>
+</html>
