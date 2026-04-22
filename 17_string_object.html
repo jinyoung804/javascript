@@ -89,10 +89,22 @@
       let lastName = "Doe";
       let fullName = firstName.concat(",", lastName, "!~~", "Welcome");
       console.log(fullName);
+      
       //11. trim() : 문자열의 앞, 뒤 공백을 없애기
       let name = "       2학년    3반        ";
       console.log(name.trim());
 
+      //12. *****padStart(문자열 전체 길이, 앞에 채울 문자열)
+      //현업에서 가장 많이 사용하고 중요하다. => 동일한 내용을 자스코드로 작성하면 매우길다
+      //월을 2자리로 출력
+      let today = new Date();
+      let month = String.getMonth();
+      if ((+month).length > 1) {
+        console.log(today);
+      } else {
+        console.log("0" + month + "월");
+      }
+      console.log(month);
     </script>
   </body>
 </html>
