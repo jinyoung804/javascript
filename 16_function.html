@@ -7,47 +7,73 @@
   </head>
   <body>
     <script src="./js/common.js">
-            /* 1. 함수 선언식 방식
-              - function 함수이름(매개변수......){
-               ::
-               (return) //있을 수도 있고 없을 수도 있다
-              }
-               - 선언전 호출이 가능
-               - 이유?
-               js는 브라우져와 Node.js로 나뉘는데 브라우져 엔진은 코드 순서대로 동작
-               1. 선언함수
-               2. var 전역 변수
+             /* 1. 함수 선언식 방식
+               - function 함수이름(매개변수......){
+                ::
+                (return) //있을 수도 있고 없을 수도 있다
+               }
+                - 선언전 호출이 가능
+                - 이유?
+                js는 브라우져와 Node.js로 나뉘는데 브라우져 엔진은 코드 순서대로 동작
+                1. 선언함수
+                2. var 전역 변수
 
-               */
-            console.log(sum(9, 8)); //호출
+                */
+             console.log(sum(9, 8)); //호출
 
-            console.log(taxAmount(14500));
+             console.log(taxAmount(14500));
 
-            /* 2. 함수 표현식 방식*/
-            //sum2(6,7);
-            const sum2= function(n1, n2){
-              return n1+n2;
-            };
-            console.log(sum2(6,7));
-            /*변수 scoope???
-              1. 매개변수? 함수에 값을 전달함 6,7 이런거
-              2.
-              :
-              var 변수1?
-               functon(){
-                      var 변수2?
-              }
-              : => 함수 바깥에 있는건 전체 실행 안에 있는건 안에서만 돌음
-      */
+             /* 2. 함수 표현식 방식*/
+             //sum2(6,7);
+             const sum2= function(n1, n2){
+               return n1+n2;
+             };
+             console.log(sum2(6,7));
+             /*변수 scoope???
+               1. 매개변수? 함수에 값을 전달함 6,7 이런거
+               2.
+               :
+               var 변수1?
+                functon(){
+                       var 변수2?
+               }
+               : => 함수 바깥에 있는건 전체 실행 안에 있는건 안에서만 돌음
+       */
 
-      /* 3. 화살표 함수
-      - function 예약어 사용 안함
-      - (매개변수) => {}
-      - return문이 있고 실행문이 한 줄인 경우 {} 생략 가능*/
+       /* 3. 화살표 함수
+       - function 예약어 사용 안함
+       - (매개변수) => {}
+       - return문이 있고 실행문이 한 줄인 경우 {} 생략 가능*/
 
-      const sum3 = (n1, n2) => n1+n2;
+       const sum3 = (n1, n2) => n1+n2;
 
-      console.log(sum3(4,5));
+       console.log(sum3(4,5));
+
+       //과제 : 더할 숫자 2개와 연산자를 입력받아 연산을 실행하는 함수를 작성해보자 매개변수 총 3개 사칙연산
+
+       // const calculator = (a,b,oper) => {
+       //   switch(oper){
+       //     case "+": return a+b;
+       //     case "-": return a-b;
+       //     case "*": return a*b;
+       //     case "/": return a/b;
+       //     default: return "연산자없음";
+       //   }
+       // };
+
+       // const num1 = +prompt('첫 번째 숫자를 입력하시오');
+       // const num2 = +prompt('두 번째 숫자를 입력하시오');
+       // const op = prompt('연산자');
+
+       // console.log(calculator(num1,num2,op));
+
+       //4. Function()생성자 함수
+       const cal2 = new Function("n1","n2","return n1+n2"); //가장 마지막 문자열 => 코드부분이 됨
+      console.log(cal2(11,22));
+
+      let op = "*"; //prompt로 받아야함
+      const cal3 = new Function("n1","n2", "return n1" + op + "n2");
+      console.log(cal3(23,3));
     </script>
   </body>
 </html>
