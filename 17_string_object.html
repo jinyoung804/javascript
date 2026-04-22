@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = "Welcome Seoul";
+      //1.property : length
+      console.log(str.length);
+
+      //2. indexOf(대상 문자열, 검색 시작 위치) : 문자열을 찾아서 그 문자열의 인덱스를 리턴해줌 첫 하나만 => 정규식
+
+      console.log(str.indexOf("Seoul")); //8
+
+      str = "Welcome Seoul Seoul";
+      console.log(str.indexOf("Seoul")); //찾고자 하는 문자열을 처음 하나만 찾고 못찾음 - 8 시작위치
+      console.log(str.indexOf("Seoul", 10)); //14     8보다 높은 숫자
+      console.log(str.indexOf("Jeju")); // -1
+
+      //활용 과제 : 전화번호 입력시 - 있으면 : 오류
+      let tel = "010-0000-0000"; //indexof 없으면 -1반환 하이픈이 있으면 -1반환 없으면 0이상 반환
+      if (tel.indexOf("-") === -1) {
+        console.log(tel);
+      } else {
+        console.log("오류입니다");
+      }
+
+      //3. lastIndexOf : 뒤에서부터 문자열을 찾아 (처음 만나는 것만) 인덱스를 리턴
+      str = "Welcome Seoul";
+      console.log(str.lastIndexOf("l")); //12
+
+      //4. ***slice(시작위치, 종료위치) : 문자열의 시작위치에서 종료위치 -1 까지 잘라내기
+      console.log(str.slice(8, 13)); //Seoul
+      console.log(str.slice(8)); //Seoul
+      console.log(str.slice(0)); //Welcome Seoul 0부터 끝까지
+      //서울의 위치를 몰라 컴퓨터에게 찾아내라고함
+      console.log(str.slice(str.indexOf("Seoul")));
+
+      //str = "Welcome Seoul";
+      //              -5-4-3-2-1
+      console.log(srt.slice(-5)); //뒤에서부터 5번째부터 끝까지 잘라내라는말   Seoul
+      console.log(str.slice(-8, -3));
+    </script>
+  </body>
+</html>
