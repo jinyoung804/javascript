@@ -92,6 +92,20 @@
       }
 
       //18. endsWith() 실무 활용 예제
+      // 파일 업로드시 jpg, png 만 가능
+
+      const fileNameCheck = (fileName) => {
+        if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
+          result = "업로드 가능";
+        } else {
+          result = "업로드 불가능";
+        }
+        return result;
+      };
+      console.log(fileNameCheck("aaa.JPG")); //업로드 가능
+      console.log(fileNameCheck("bbb.gif")); //업로드 불가능
+
+      //toUpperCase 써서 대문자로 하기
     </script>
   </body>
 </html>
