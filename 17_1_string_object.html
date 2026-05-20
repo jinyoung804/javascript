@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //4. slice() 실무 활용 예제
+      //4-1. 긴 문자열을 일부만 잘라서 보여주고 나머지는 "..." 처리시
+      const longString =
+        "올해 1분기 한국 경제가 주요 국가 가운데 가장 높은 성장률을 기록한 것으로 나타났다. 지난해 말까지만 해도 세계 주요국 가운데 하위권에 머물렀던 한국 경제가 불과 한 분기 만에 분위기를 완전히 뒤집은 것이다. ";
+      const truncateTitle = (title, maxLength) => {
+        if (title.length > maxLength) {
+          return title.slice(0, maxLength) + "....";
+        } else {
+          return title;
+        }
+      };
+      console.log(truncateTitle(longString, 15)); //longString은 title, 15는 maxLength
+
+      //4-2. 마스킹
+      let phoneNumber = "010-1234-5678";
+      let hiddenNumber = "";
+      hiddenNumber = phoneNumber.slice(0, -4) + "****";
+      console.log(hiddenNumber); //010-1234-****
+      phoneNumber = "010-345-6789";
+      hiddenNumber = phoneNumber.slice(0, -4) + "****";
+      console.log(hiddenNumber); //010-345-****
+
+      //7.repalce() 실무 활용 예제(with 정규식(regular expression))
+      //회원가입시 전번 010-1111-2222 형식으로 입력 => db에 저장시 01011112222
+      /*정규식 : 특정한 포맷을 만들어 내는 식
+      - /   /사이에 작성
+      - D : 숫자 의미
+      - \ : not
+      - 옵션 : g => 모두(all)      i=> 대소문자를 구분하지 않는다.  */
+      phoneNumber = "010-345-6789";
+      let clearNumber = phoneNumber.replace(/\D/g, "");
+
+      console.log(clearNumber); // 0103456789
+      //12. padStart() 실무 활용 예제
+      //14. charAt() 실무 활용 예제
+      //16. split() 실무 활용 예제
+      //18. endsWith() 실무 활용 예제
+    </script>
+  </body>
+</html>
