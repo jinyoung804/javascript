@@ -38,9 +38,17 @@
       - 옵션 : g => 모두(all)      i=> 대소문자를 구분하지 않는다.  */
       phoneNumber = "010-345-6789";
       let clearNumber = phoneNumber.replace(/\D/g, "");
-
       console.log(clearNumber); // 0103456789
+
+       let str = "Welcome JeJu!! jeju!!";
+      console.log(str.replace(/JeJu/gi, "Seoul"));
+      
       //12. padStart() 실무 활용 예제
+      //앞자리 마스킹, 카드 번호(16)를 db에서 읽어와 뒷자리 4자리만 보여주고자 할 경우
+      const cardNumber = "7654";
+      const maskCardNumber = cardNumber.padStart(16, "*");
+      console.log(maskCardNumber);
+
       //14. charAt() 실무 활용 예제
       //16. split() 실무 활용 예제
       //18. endsWith() 실무 활용 예제
