@@ -113,13 +113,20 @@
         ];
         //2. 데이터 갯수 만큼 랜더링해서 출력
         let trTags = [];
-        for (drink of drinkList) {
-          trTags = drinkList.push(drink.name);
-          trTags = drinkList.push(drink.price);
-          drink.join();
+        for (let drink of drinkList) {
+          let row =
+            "<tr>" +
+            "<td>" +
+            drink.name +
+            "</td>" +
+            "<td>" +
+            drink.price +
+            "</td>" +
+            "</tr>";
+          trTags.push(row);
         }
         console.log(trTags);
-        document.getElementById("tbody").innerHTML = trTags;
+        document.getElementById("tbody").innerHTML = trTags.join("");
       };
     </script>
   </body>
