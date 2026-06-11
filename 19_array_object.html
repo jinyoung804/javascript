@@ -22,6 +22,17 @@
     </style>
   </head>
   <body>
+    <select id="selDrinkType">
+      <option value="coke">콜라</option>
+      <option value="sprite">사이다</option>
+      <option value="fanta">환타</option>
+    </select>
+    <select id="selDrinkType2">
+      <option value="coke">콜라</option>
+      <option value="sprite">사이다</option>
+      <option value="fanta">환타</option>
+    </select>
+    <br />
     <button onclick="doSearch1()">조회1</button>
     <button onclick="doSearch2()">조회2</button>
     <table class="tableEx">
@@ -128,6 +139,200 @@
         console.log(trTags);
         document.getElementById("tbody").innerHTML = trTags.join("");
       };
+      //3. pop() : 배열의 마지막 요소를 제거 , 리턴 값 : 제거한 요소
+      brands = ["구글", "애플", "아마존", "삼성", "하이닉스", "메타"];
+      console.log(brands.pop()); //메타
+      console.log(brands);
+
+      //4. push() : 배열의 마지막 요소를 추가, 리턴 값 : length
+      //실무에서 태그 생성 + join()과 함께
+      console.log(brands.push("테슬라")); //6
+      console.log(brands);
+
+      //5. shift() : 배열의 첫 요소를 제거, 리턴 값 : 요소
+      //실무 ??? 서버프로그램에서 많이 상용 => 요청을 배열에 쌓아두었다가
+      //이벤트 큐에 순서대로 정리된 목록에서 1번 요청, 2번 요청... 하나씩 꺼내서 작업을 처리
+      console.log(brands.shift()); //구글
+      console.log(brands);
+
+      //6. unshift(): 배열의 첫 요소를 추가, 리턴 값 : length
+      console.log(brands.unshift("쿠팡")); //6
+      console.log(brands);
+      //화면이 로드되면 db에서 데이터를 읽어와서 select에 동적으로 요소를 보여주기
+
+      const loadDrinkType = () => {
+        const drinks = [
+          { text: "이온음료", code: "ion" },
+          { text: "커피", code: "coffee" },
+          { text: "라떼", code: "latte" },
+        ];
+
+        drinks.unshift({ text: "전체", code: "all" });
+
+        let tags = [];
+        for (const drink of drinks) {
+          tags.push(
+            "<option value='" + drink.code + "'>" + drink.text + "</option>",
+          );
+        }
+
+        return tags;
+      };
+
+      const selDrink = loadDrinkType();
+      //console.log(selDrink); ['<option value =ion>이온음료</option>', '<option value =coffee>커피</option>', '<option value =latte>라떼</option>']
+      //selDrink.unshift();
+
+      document.getElementById("selDrinkType").innerHTML = selDrink.join("");
+
+      const loadDrinkType2 = (plus) => {
+        const drinks = [
+          { text: "이온음료", code: "ion" },
+          { text: "커피", code: "coffee" },
+          { text: "라떼", code: "latte" },
+        ];
+
+        // 1. 외부에서 추가할 옵션(plus)을 넘겨주었다면 배열 맨 앞에 추가합니다.
+        if (plus) {
+          drinks.unshift(plus);
+        }
+
+        // 2. 변수를 먼저 선언합니다.
+        let tags = [];
+
+        // 3. 반복문을 돌며 각 drink의 데이터를 매핑합니다.
+        for (const drink of drinks) {
+          tags.push(
+            "<option value='" + drink.code + "'>" + drink.text + "</option>",
+          );
+        }
+
+        return tags;
+      };
+      //text : 전체, code : all
+      const selDrink2 = loadDrinkType2({ text: "전체", code: "all" }); //전체를 선택하게 하고싶을때만 전체가 출력될 수 있게 아닐때는 그냥 원래 음료만 나오게 plus
+      //console.log(selDrink); ['<option value =ion>이온음료</option>', '<option value =coffee>커피</option>', '<option value =latte>라떼</option>']
+      //selDrink.unshift();
+
+      document.getElementById("selDrinkType2").innerHTML = selDrink2.join("");
+
+      //7. splice(p1, p2, p3) : 원하는 위치에 특정 요소를 추가하거나 제거
+      //p1 : 원하는 위치
+      //p2 : 삭제할 갯수
+      //p3 : 추가할 요소
+      //원 배열은 변할까???
+
+      brands = ["구글", "애플", "아마존", "삼성", "하이닉스", "메타"];
+
+      //애플 앞에 테슬라 넣기
+
+      console.log(brands.splice(1, 0, "테슬라"));
+      console.log(brands);
+
+      //아마존 삭제
+      console.log(brands.splice(3, 1));
+      console.log(brands); //["구글", "테슬라","애플", "삼성", "하이닉스", "메타"]
+
+      //애플앞에 아마존 넣기 로직으로
+      console.log(brands.splice(brands.indexOf("애플"), 0, "아마존")); //그럼 애플의 위치에 들어가는게아닌가?
+
+      //8. concat() : 배열을 합치기(갯수 제한 없음)
+      let arr1 = ["공은성", "김세주"];
+      let arr2 = ["최명준", "홍성재"];
+      let arr3 = ["신수아", "윤지온"];
+      let arr4 = arr1.concat(arr2); //4번배열은 1번배열과 2번배열 합치기
+      console.log(arr4);
+
+      let arr5 = arr1.concat(arr2, arr3);
+      console.log(arr4);
+
+      //******spread operator *******(전개 연산자)
+      let arr6 = [...arr1, ...arr2, ...arr3]; //무조건 점 3개
+      console.log(arr6);
+
+      //9. slice(start,end) : end-1 까지 잘라내기 => 배열로 리턴
+      console.log(brands); //['구글', '테슬라', '아마존', '애플', '삼성', '하이닉스', '메타']
+      const newBrands = brands.slice(0, 4);
+      console.log(newBrands);
+      console.log(brands);
+
+      //10. **************************sort()**********************
+      /* - 문자열 오름차순이 기본
+         - 숫자에 대해서 별도의 알고리즘이 필요
+         자바스크립트의 비교 함수의 동작원리 => 엔진이 내부적으로 알고리즘
+         (크롬의 경우 TimSort 알고리즘)을 갖고 있으며 함수를 매개변수로 사용한다.
+         반환값아 따라 다음과 같이 동작한다.
+
+         const 결과 배열 = 대상배열.sort((a,b) => { 여러개 숫자가 있으면 예를 들어 2 1 9 5 7 있으면 2,1을 먼저 비교해서 2가 더 크니까 둘이 자리를 바꿈 이러면서 계속 자리를 바꿈
+         if(a>b) return 1; //양수이면 자리를 바꾼다.
+         else if(a<b) return -1; //음수이면 자리를 바꾸지 않는다.
+         else 0; //순서를 바꾸지 않는다.
+         })
+      */
+      console.log(brands.sort());
+      console.log(arr5.sort());
+
+      let points = [100, 98, 89, 95, 76, 64];
+      console.log(points.sort()); // [100, 64, 76, 89, 95, 98] 맨 앞 숫자 비교해서
+
+      const asc = points.sort((a, b) => {
+        //오름차순
+        // if (a > b) return 1;
+        // else if (a < b) return -1;
+        // else 0; 5줄 코드
+        return a - b; //1줄 코드 a가 b보다 크면 a-b는 양수가 나옴
+      });
+      console.log(asc); //[64, 76, 89, 95, 98, 100]
+
+      //내림차순
+      const desc = points.sort((a, b) => {
+        // if (a < b) return 1;
+        // else if (a > b) return -1;
+        // else 0;
+        return b - a;
+      });
+      console.log(desc); //[100, 98, 95, 89, 76, 64];
+
+      const drinkList = [
+        { name: "오렌지", price: 1000 },
+        { name: "파워에이드", price: 1200 },
+        { name: "커피", price: 700 },
+        { name: "보리음료", price: 1200 },
+        { name: "코카콜라", price: 1800 },
+      ]; //배열
+      //1. 가격 오름차순 정렬
+
+      const ascPrice = drinkList.sort((a, b) => {
+        //a,b에 객체가 들어옴
+        return a.price - b.price;
+      });
+      console.log(ascPrice);
+      //2. 두번째거 하기 전에 첫번째꺼 주석처리하고 하기  -> 이름 내림차순 -> 주석
+      const descName = drinkList.sort((a, b) => {
+        if (a.name > b.name) {
+          return -1;
+        }
+        if (a.name < b.name) {
+          return 1;
+        }
+        return 0;
+      });
+
+      console.log(descName); //문자열은 안되니까 숫자로 바꿔줘야됨
+      //3. 키(기준)이름을 입력받아 오름차순 정렬
+      let key = prompt("name과 price 중 어떤 것을 기준으로 할건가요?");
+
+      drinkList.sort((a, b) => {
+        if (a[key] > b[key]) {
+          return 1;
+        }
+        if (a[key] < b[key]) {
+          return -1;
+        }
+        return 0;
+      });
+
+      console.log(drinkList);
     </script>
   </body>
 </html>
