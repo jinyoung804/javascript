@@ -332,6 +332,22 @@
         return 0;
       });
 
+       //1. 카테고리가 악세서리인거 고르기
+      const accessories = products.filter((product) => {
+        return product.category === "accessories";
+      });
+      console.log(accessories);
+      //2. 가격이 10만원 이하인거 고르기
+      const underMillion = products.filter((product) => {
+        return product.price <= 100000;
+      });
+      console.log(underMillion);
+      //3. 카테고리가 악세서리 이면서 가격이 10만원이하인거 고르기
+      const double = products.filter((product) => {
+        return product.category === "accessories" && product.price <= 100000;
+      });
+      console.log(double);
+
       console.log(drinkList);
     </script>
   </body>
