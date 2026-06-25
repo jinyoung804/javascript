@@ -1,0 +1,83 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="date" id="startDate" />
+    <input type="date" id="endDate" />
+
+    <script>
+      //1. 오늘 날짜정보 얻어오기 (매개 변수 없이)
+      let now = new Date();
+      console.log(now);
+
+      //2. 사용자가 날짜를 지정해서 날짜 객체 만들기
+      let d = new Date(2025, 4, 29, 19, 34, 20, 0);
+      console.log(d);
+
+      //3. get() 함수
+      let year = now.getFullYear();
+      let month = now.getMonth();
+      let date = now.getDate();
+      let dayName = now.getDay();
+      let hour = now.getHours();
+      let minute = now.getMinutes();
+      let second = now.getSeconds();
+      let millisec = now.getMilliseconds();
+
+      console.log(year, month, date, dayName, hour, minute, second, millisec);
+
+      //4. set() 함수 => 실무에서 거의 사용하지 않는다.
+
+      //5. 오늘 날짜를 endDate에 출력
+      let today =
+        year.toString() +
+        "-" +
+        (month + 1).toString().padStart(2, "0") +
+        "-" +
+        date.toString().padStart(2, "0");
+
+      console.log(today);
+
+      document.getElementById("endDate").value = today;
+
+      //6. 오늘을 기준으로 1주일 전을 startDate에 출력
+
+      //기준시 : 1970-01-01 00:00:00
+      let standard = new Date(0);
+      console.log(standard);
+
+      //현재 시간을 밀리초로 변환
+      let todayMilliSec = now.getTime();
+      console.log(todayMilliSec);
+
+      //하루의 밀리초
+      let dayMillisec = 24 * 60 * 60 * 1000;
+      console.log(dayMillisec);
+
+      //어제
+      let yesterDay = new Date(todayMilliSec - dayMillisec);
+      console.log(yesterDay);
+
+      //7일 전
+      let lastDate = new Date(todayMilliSec - dayMillisec * 7);
+      console.log(lastDate);
+
+      let last =
+        lastDate.getFullYear().toString() +
+        "-" +
+        (lastDate.getMonth() + 1).toString().padStart(2, "0") +
+        "-" +
+        lastDate.getDate().toString().padStart(2, "0");
+
+      console.log(last);
+
+      document.getElementById("startDate").value = last;
+    </script>
+  </body>
+</html>
+```
