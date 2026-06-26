@@ -1,10 +1,11 @@
-```html
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
   </head>
   <body>
     <input type="date" id="startDate" />
@@ -28,12 +29,12 @@
       let minute = now.getMinutes();
       let second = now.getSeconds();
       let millisec = now.getMilliseconds();
-
-      console.log(year, month, date, dayName, hour, minute, second, millisec);
+      let dayNameArr = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+      console.log(year, month+1, date, dayNameArr[dayName], hour, minute, second, millisec);
 
       //4. set() 함수 => 실무에서 거의 사용하지 않는다.
 
-      //5. 오늘 날짜를 endDate에 출력
+      //5. '2026-06-24' 으로 
       let today =
         year.toString() +
         "-" +
@@ -77,7 +78,30 @@
       console.log(last);
 
       document.getElementById("startDate").value = last;
+
+      //오늘 기준으로 며칠 전(-n) 후(n)를 구하는 함수 : getIntervaldate()
+      const getIntervaldate = (day) => {
+        let today = new Date();
+       let year = now.getFullYear();
+      let month = now.getMonth();
+      let date = now.getDate();
+      let dayName = now.getDay();
+      let hour = now.getHours();
+      let minute = now.getMinutes();
+      let second = now.getSeconds();
+      let millisec = now.getMilliseconds();
+      let dayNameArr = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+
+       let dayMillisec = 24 * 60 * 60 * 1000; //하루 밀리초
+      let intervalDay =  now.getTime() + day*dayMillisec
+      return new Date(intervalDay);
+      };
+      console.log(`3일전 : ${getIntervaldate(-3)}`)// 3일전 6/23
+      console.log(`7일전 : ${getIntervaldate(-7)}`) //7일전 6/19
+      console.log(`30일 후 : ${getIntervaldate(30)}`) //30일 후 5/25
+      console.log(`3일 후 : ${getIntervaldate(3)}`) //3일 후 6/29
+
+       
     </script>
   </body>
 </html>
-```
