@@ -101,7 +101,36 @@
       console.log(`30일 후 : ${getIntervaldate(30)}`) //30일 후 5/25
       console.log(`3일 후 : ${getIntervaldate(3)}`) //3일 후 6/29
 
-       
+        //8. 내가 원하는 포맷으로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
+      const getIntervalDateFormat = (day, format) => {
+        let date = [];
+        let today = new Date();
+        let dayMillisec = 24*60*60*1000;
+        let intervalDay = today.getTime() + day*dayMillisec
+
+        if(getIntervalDateFormat.format === "YYYY-MM-DD"){
+          let today = year.toString() +
+        "-" +
+        (month + 1).toString().padStart(2, "0") +
+        "-" +
+        date.toString().padStart(2, "0");
+
+      console.log(today);
+        }else if(getIntervalDateFormat.format === "YY-MM-DD"){
+          today = 
+          year.toString.padStart(2,"") + "-" +
+          (month + 1).toString().padStart(2, "0") +
+        "-" +
+        date.toString().padStart(2, "0");
+
+      console.log(today);
+        }
+      };
+   console.log(getIntervalDateFormat(-3, "YYYY-MM-DD")) ;//2026-06-28
+   console.log( getIntervalDateFormat(3, "YY-MM-DD")); //26-06-28
+
+     //9.내가 원하는 구분자로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
+
     </script>
   </body>
 </html>
