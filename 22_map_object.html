@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // key와 value로 이루어진 객체, object와 유사 (object는 문자만 가능, 속성 제공 X, for...in...의 순서 보장 X)
+      // key에 문자가 아닌 값이 올 수 있으므로, 키가 문자열이 아닌 objet를 만들고자 할 경우 대체제로 활용이 가능
+      // 파이썬의 딕셔너리와 유사
+      // map은 iterable 객체이므로 forEach()를 사용하면 매우 효과적임
+      //객체는 불편해 순서가 없어!
+      /*
+      Object와 Map의 차이
+      key : 문자만 가능    모든 타입 가능
+      size property : 속성 제공 X  size 속성 제공
+      for ..in..의 순서 : 보장 X   보장 O
+
+      주요 메서드 : key, values, set, get, has, delete, clear
+
+      map은 inerable 객체이므로 forEach()를 사용하면 매우 효과적 map이름.forEach(함수)
+      */
+      let oPerson = {};
+      oPerson.name = "공은성";
+      oPerson.phone = "010-1223-3756";
+      oPerson["185"] = 70;
+      //객체의 키와 값, 사이즈 출력
+      let count = 0;
+      for (const key in oPerson) {
+        console.log("${key} : ${oPerson[key]}");
+        count++;
+      }
+      console.log("사이즈 : ${count} 개");
+
+      //1.생성
+      let personMap = new Map();
+      personMap.set("name", "공은성");
+      personMap.set("phone", "010-1223-3756");
+      personMap.set(185, 70);
+
+      //2. 출력 => forEach => (값, 키) : 순서 보장
+      personMap.forEach((value, key) => {
+        console.log("${key} : ${value}");
+      });
+      //3. size속성
+      console.log("${personMap.size} 개");
+
+      //4. keys() : key만 읽어오기
+      for (const key of personMap.keys()) {
+        console.log(key);
+      }
+      //5. values() :  value만 읽어오기
+      for (const value of personMap.values()) {
+        console.log(value);
+      }
+
+      //6. get() : 특정 키의 값을 읽어오기
+      console.log(personMap.get("name"));
+      console.log(personMap.get("address")); //undefined
+
+      //7. has() : 해당 키가 존재하는지 여부 true/false로 나타냄
+      if (personMap.has("name")) {
+        alert("해당 키가 존재합니다.");
+      }
+      //8. delete() : 해당 키와 값을 삭제
+      personMap.delete(185);
+      console.log(personMap.has(185)); //false
+
+      //9.clear() : 전체 삭제
+      personMap.clear();
+      console.log(personMap.size);
+    </script>
+  </body>
+</html>

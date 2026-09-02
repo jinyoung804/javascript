@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1. round()
+      //new Set(), new Map(), new Math()X  --> Math.메서드
+      console.log(Math.round(2.4)); //2
+      console.log(Math.round(2.9)); //3
+      console.log(Math.round(-2.4)); //-2
+      console.log(Math.round(-2.9)); //-3
+
+      //2. ceil()
+      console.log(Math.ceil(2.4)); //3
+      console.log(Math.ceil(2.9)); //3
+      console.log(Math.ceil(-2.4)); //-2
+      console.log(Math.ceil(-2.9)); //-2
+
+      //페이징처리 : 게시판에 글이 56개 잇다. 한 페이지당 10개씩 노출한다. 그러면 페이지 몇개 필요하니?
+      let total = 56;
+      let countPage = 0;
+      let countPerPage = 10;
+      countPage = Math.ceil(total / countPage);
+      console.log(`필요한 페이지수 : ${countPage}`);
+
+      //3. floor() //소수점 자르기
+      console.log(Math.floor(2.4)); //2
+      console.log(Math.floor(2.9)); //2
+      console.log(Math.floor(-2.4)); //-3
+      console.log(Math.floor(-2.9)); //-2
+
+      //4. trunc() - 소수점 자르기
+      console.log(Math.trunc(2.4)); //2
+      console.log(Math.trunc(2.9)); //2
+      console.log(Math.trunc(-2.4)); //-2
+      console.log(Math.trunc(-2.9)); //-2
+
+      //5. sign()
+      console.log(Math.sign(2.9)); //1
+      console.log(Math.sign(0)); //0
+      console.log(Math.sign(-2, 4)); //-1
+
+      //6. pow()
+      console.log(Math.pow(2, 3)); //8
+      console.log(Math.pow(4, 5)); //1024
+      console.log(Math.pow(2, 10)); //1024
+
+      //7. sqrt() 제곱근
+      console.log(Math.sqrt(12)); //3.4641016151377544
+      console.log(Math.sqrt(4)); //2
+      console.log(Math.sqrt(100)); //10
+
+      //8. abs()
+      console.log(Math.abs(-12)); //12
+      console.log(Math.abs(-4)); //4
+      console.log(Math.abs(100)); //100
+
+      //9. min() : parameter 개수에 상관없다
+      console.log(Math.min(-12, 3, 4, 8, 12, 1.2)); // -12
+      console.log(Math.min(-12, 3, 4)); // -12
+      console.log(Math.min(12, 3, 4, 8, 12, 1.2, 0.7, 100)); //0.7
+
+      //10. max() : parameter 개수에 상관없다
+      console.log(Math.max(-12, 3, 4, 8, 12, 1.2)); // 12
+      console.log(Math.max(-12, 3, 4)); // 4
+      console.log(Math.max(12, 3, 4, 8, 12, 1.2, 0.7, 100)); //100
+
+      //11. 0<= random() <1
+      console.log(Math.random());
+
+      //0~9 정수 출력
+      console.log(Math.floor(Math.random() * 10) + 0); //여기 10은 10 = 9-0+1
+      //1~10 정수 출력
+      console.log(Math.floor(Math.random() * 10) + 1); //여기 10은 10 = 10-1+1
+      //1~100 정수 출력
+      console.log(Math.floor(Math.random() * 100) + 1); //여기 100은 100= 100-1+1
+
+      //getRandomInteger(min,max) => 정수
+      const getRandomInteger = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      };
+      console.log(getRandomInteger(1, 7));
+    </script>
+  </body>
+</html>

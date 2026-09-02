@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /*개발자들은 왜 일반 객체대신 map을 쓸까요?
+     1. 갯수 구하기 쉬움
+     2. 자료를 추가하고 삭제하는 속도가 빠름
+     3. key에 무엇이든 올 수 있음 */
+
+      /*실무 예제 : 온라인 쇼핑몰 장바구니 관리
+     쇼핑몰 웹사이트를 만들 때 장바구니는 아래 기능이 반드시 필요하다.
+     1. 상품 담기 (추가)
+     2. 이미 담긴 상품인지 확인하고 수량 늘리기 (조회 및 수정)
+     3. 상품 빼기(삭제)
+     4. 장바구니에 총 몇 종류의 상품이 있는지 확인(개수 파악) */
+
+      const myCart = new Map();
+
+      //이미 장바구니에 들어있는 제품 목록
+      myCart.set("product_01", {
+        name: "핸드폰",
+        price: 1800000,
+        quantity: 1,
+      });
+
+      myCart.set("product_12", {
+        name: "노트북",
+        price: 3000000,
+        quantity: 1,
+      });
+
+      myCart.set("product_100", {
+        name: "하리보",
+        price: 2000,
+        quantity: 5,
+      });
+
+      //추가로 구매할 상품
+      let userInput = "product_12";
+
+      //장바구니에 있는지 확인하고 실행 => myCartCheckAndDo() 함수
+      /*있다면? => 정말 추가할래? 예 => quantity++
+                              아니오 => X
+       없다면? console.log("추가하였습니다");       */
+
+      /*let quantity = 1;
+      const myCartCheckAndDo = (productId) => {
+        if (myCart.has(userInput) === "true") {
+          let answer = prompt(
+            "똑같은 상품이 이미 담겨있습니다. 추가하시겠습니까?",
+          );
+          if (answer === "예") {
+            userInput.quantity++;
+          } else {
+            console.log(userInput.quantity);
+          }
+        } else if (myCart.has(userInput) === "false") {
+          console.log("추가하였습니다.");
+          userInput.quantity += 1;
+        }
+        console.log("현재 장바구니에 담긴 노트북의 갯수 :", quantity);
+      };
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);*/
+
+      const myCartCheckAndDo = (productId) => {
+        if (myCart.has(productId)) {
+          alert("이미 있는 상품입니다.");
+
+          const answer = prompt(
+            "이미 장바구니에 있는 상품입니다. 추가하시겠습니까? (예/아니오)",
+          );
+
+          if (answer === "예") {
+            const item = myCart.get(productId); //키에 해당하는 내용 가져오기
+            item.quantity += 1; //item은 object
+            myCart.set(productId, item); //키에 해당하는 내용의 갯수 1증가한 값으로 고치기
+
+            console.log(
+              `현재 장바구니에 담긴 ${item.name}의 갯수 : ${item.quantity}`,
+            );
+          }
+        } else {
+          console.log("추가하였습니다.");
+        }
+      };
+
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);
+      myCartCheckAndDo(userInput);
+
+      /*장바구니 내역 다 보여주기
+      - 마지막줄
+      물건 종류 : 3종류
+      총 갯수 : 9개
+      총 가격: --원
+
+      => showMyCart() */
+
+      const showMyCart = () => {
+        let totalQuantity = 0;
+
+        let totalPrice = 0;
+
+        console.log("장바구니 내역");
+
+        //myCart에 담긴 상품을 하나씩 꺼내서 확인
+        for (const [productId, item] of myCart) {
+          //상품 한 종류의 총 가격을 계산
+          const itemTotalPrice = item.price * item.quantity;
+
+          //상품명, 상품 가격, 수량 출력
+          console.log(
+            `${item.name} / 가격 : ${item.price}원 / 갯수 : ${item.quantity}개`,
+          );
+
+          totalQuantity += item.quantity;
+
+          totalPrice += itemTotalPrice;
+        }
+
+        console.log("========================");
+
+        console.log(`물건 종류 : ${myCart.size}종류`);
+
+        console.log(`총 갯수 : ${totalQuantity}개`);
+
+        console.log(`총 가격 : ${totalPrice}원`);
+      };
+
+      showMyCart();
+    </script>
+  </body>
+</html>

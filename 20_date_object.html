@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-</head>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
   </head>
+
   <body>
     <input type="date" id="startDate" />
     <input type="date" id="endDate" />
+    <script src="./js/common.js"></script>
 
     <script>
       //1. 오늘 날짜정보 얻어오기 (매개 변수 없이)
@@ -29,12 +30,29 @@
       let minute = now.getMinutes();
       let second = now.getSeconds();
       let millisec = now.getMilliseconds();
-      let dayNameArr = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-      console.log(year, month+1, date, dayNameArr[dayName], hour, minute, second, millisec);
+      let dayNameArr = [
+        "일요일",
+        "월요일",
+        "화요일",
+        "수요일",
+        "목요일",
+        "금요일",
+        "토요일",
+      ];
+      console.log(
+        year,
+        month + 1,
+        date,
+        dayNameArr[dayName],
+        hour,
+        minute,
+        second,
+        millisec,
+      );
 
       //4. set() 함수 => 실무에서 거의 사용하지 않는다.
 
-      //5. '2026-06-24' 으로 
+      //5. '2026-06-24' 으로
       let today =
         year.toString() +
         "-" +
@@ -80,57 +98,56 @@
       document.getElementById("startDate").value = last;
 
       //오늘 기준으로 며칠 전(-n) 후(n)를 구하는 함수 : getIntervaldate()
-      const getIntervaldate = (day) => {
-        let today = new Date();
-       let year = now.getFullYear();
-      let month = now.getMonth();
-      let date = now.getDate();
-      let dayName = now.getDay();
-      let hour = now.getHours();
-      let minute = now.getMinutes();
-      let second = now.getSeconds();
-      let millisec = now.getMilliseconds();
-      let dayNameArr = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
 
-       let dayMillisec = 24 * 60 * 60 * 1000; //하루 밀리초
-      let intervalDay =  now.getTime() + day*dayMillisec
-      return new Date(intervalDay);
-      };
-      console.log(`3일전 : ${getIntervaldate(-3)}`)// 3일전 6/23
-      console.log(`7일전 : ${getIntervaldate(-7)}`) //7일전 6/19
-      console.log(`30일 후 : ${getIntervaldate(30)}`) //30일 후 5/25
-      console.log(`3일 후 : ${getIntervaldate(3)}`) //3일 후 6/29
+      console.log(`3일전 : ${getIntervaldate(-3)}`); //3일전 6/23
+      console.log(`7일전 : ${getIntervaldate(-7)}`); //7일전 6/19
+      console.log(`30일 후 : ${getIntervaldate(30)}`); //30일 후 5/25
+      console.log(`3일 후 : ${getIntervaldate(3)}`); //3일 후 6/29
 
-        //8. 내가 원하는 포맷으로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
-      const getIntervalDateFormat = (day, format) => {
-        let date = [];
-        let today = new Date();
-        let dayMillisec = 24*60*60*1000;
-        let intervalDay = today.getTime() + day*dayMillisec
-
-        if(getIntervalDateFormat.format === "YYYY-MM-DD"){
-          let today = year.toString() +
+      /* '2026-06-24' 으로 
+      let today =
+        year.toString() +
         "-" +
         (month + 1).toString().padStart(2, "0") +
         "-" +
         date.toString().padStart(2, "0");
 
       console.log(today);
-        }else if(getIntervalDateFormat.format === "YY-MM-DD"){
-          today = 
-          year.toString.padStart(2,"") + "-" +
-          (month + 1).toString().padStart(2, "0") +
-        "-" +
-        date.toString().padStart(2, "0");
 
-      console.log(today);
+      document.getElementById("endDate").value = today;
+
+
+
+      let date = [];
+        let today = new Date();
+        let dayMillisec = 24 * 60 * 60 * 1000; //하루 밀리초
+        let intervalDay =  today.getTime() + day*dayMillise
+*/
+
+      //8. 내가 원하는 포맷으로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
+      const getIntervalDateFormat = (day, format) => {
+        let today = new Date();
+        let todayMilliSec = today.getTime();
+        let dayMillisec = 24 * 60 * 60 * 1000;
+        let intervalDay = new Date(todayMilliSec + dayMillisec * day);
+
+        let year = intervalDay.getFullYear();
+        let month = String(intervalDay.getMonth() + 1).padStart(2, "0");
+        let date = String(intervalDay.getDate()).padStart(2, "0");
+
+        let separator = format.charAt(format.lastIndexOf("Y") + 1);
+        let formatArr = format.split(separator);
+        if (formatArr.length === 2) {
+          year = year.toString().slice(2);
         }
+        return `${year}${separator}${month}${separator}${date}`;
       };
-   console.log(getIntervalDateFormat(-3, "YYYY-MM-DD")) ;//2026-06-28
-   console.log( getIntervalDateFormat(3, "YY-MM-DD")); //26-06-28
+      console.log(getIntervalDateFormat(-3, "YYYY-MM-DD")); //2026-06-28
+      console.log(getIntervalDateFormat(3, "YY-MM-DD")); //26-06-28
 
-     //9.내가 원하는 구분자로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
+      //9.내가 원하는 구분자로 오늘 기준으로 며칠 전(-n)후(n)을 구하는 함수
 
+      //10.
     </script>
   </body>
 </html>
