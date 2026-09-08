@@ -1,22 +1,79 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>가위바위보</title>
   </head>
   <body>
-    <button onclick="">가위</button>
-    <button onclick="">바위</button>
-    <button onclick="">보</button>
-    <script src=" ./js/common.js"></script>
+    <button onclick="srp('가위')">가위</button>
+    <button onclick="srp('바위')">바위</button>
+    <button onclick="srp('보')">보</button>
+
+    <script src="./js/common.js"></script>
+
     <script>
       ////활용4. 시작값과 종료값을 주면 사이값을 random하게 나오는 함수를 작성하여 활용해보자
-      //조건1. 반드시 common의 getRamdomInteger 사용
+      //조건1. 반드시 common의 getRandomInteger 사용
       //조건2. 다양한 object를 활용
-      const srp = () => {
-        getRandomInteger();
-        console.log(`사용자: ${srp}`);
+
+      const srp = (user) => {
+        const randomNumber = getRandomInteger(1, 3);
+
+        let computer;
+
+        if (randomNumber === 1) {
+          computer = "가위";
+        } else if (randomNumber === 2) {
+          computer = "바위";
+        } else {
+          computer = "보";
+        }
+
+        console.log(`사용자: ${user}`);
+        console.log(`컴퓨터: ${computer}`);
+
+        if (user === "가위") {
+          if (computer === "가위") {
+            console.log("결과: 비겼습니다.");
+          }
+
+          if (computer === "바위") {
+            console.log("결과: 졌습니다.");
+          }
+
+          if (computer === "보") {
+            console.log("결과: 이겼습니다.");
+          }
+        }
+
+        if (user === "바위") {
+          if (computer === "가위") {
+            console.log("결과: 이겼습니다.");
+          }
+
+          if (computer === "바위") {
+            console.log("결과: 비겼습니다.");
+          }
+
+          if (computer === "보") {
+            console.log("결과: 졌습니다.");
+          }
+        }
+
+        if (user === "보") {
+          if (computer === "가위") {
+            console.log("결과: 졌습니다.");
+          }
+
+          if (computer === "바위") {
+            console.log("결과: 이겼습니다.");
+          }
+
+          if (computer === "보") {
+            console.log("결과: 비겼습니다.");
+          }
+        }
       };
     </script>
   </body>
