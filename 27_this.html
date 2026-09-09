@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="myFunction2(this)">클릭</button>
+    <select name="" id="" onchange="myFunction2(this)">
+      <option value="">A</option>
+      <option value="">B</option>
+      <option value="">C</option>
+    </select>
+    <script>
+      console.log(this);
+
+      function myFunction() {
+        console.log(this);
+      }
+      myFunction();
+
+      const myFunction2 = (param) => {
+        console.log(param);
+      };
+
+      let firstName = "Brad";
+      let lastName = "Pitt";
+
+      let person = {
+        firstName: "공",
+        lastName: "은성",
+        getFullName: function () {
+          return this.firstName + this.lastName; //객체 안에 있는것들을 쓰고싶으면 this!!!사용
+        },
+      };
+
+      console.log(person.getFullName()); //this사용안하면 bradpitt 나옴
+    </script>
+  </body>
+</html>
