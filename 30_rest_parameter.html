@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //sum2, sum3, sum4, sumN
+      function sum2(a, b) {
+        console.log(a + b);
+      }
+      sum2(4, 5);
+
+      function sum3(a, b, c) {
+        console.log(a + b + c);
+      }
+      sum3(1, 2, 3);
+
+      function sum4(a, b, c, d) {
+        console.log(a + b + c + d);
+      }
+      sum4(4, 5, 6, 7);
+      function sumN(arr) {
+        // let sum = 0;
+        sum = arr.reduce((acc, curr) => acc + curr, 0);
+        return sum;
+      }
+      console.log(sumN([1, 2, 3, 4, 5])); //15
+      console.log(sumN([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); //55
+
+      //... : spread operator
+
+      function sumRM(...nums) {
+        let sum = 0;
+        for (const n of nums) {
+          sum += n;
+        }
+        return sum;
+      }
+      //rest parameter : 매개변수의 갯수에 관계없이 동작하고자 할 때
+      console.log(sumRM(1, 2, 3, 4, 5));
+      console.log(sumRM(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    </script>
+  </body>
+</html>

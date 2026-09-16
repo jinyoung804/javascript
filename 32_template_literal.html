@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //`` 백틱을 templateliteral 이라고 함
+      function sayHello(firstName, lastName) {
+        alert("Hello " + firstName + " " + lastName + "!~");
+      }
+      sayHello("홍", "성재");
+      function sayHello2(firstName, lastName) {
+        alert(`Hello ${firstName}  ${lastName}!~`);
+      }
+      let personMap = new Map();
+      personMap.set("name", "공은성");
+      personMap.set("phone", "010-1223-3756");
+      personMap.set(185, 70);
+      console.log(personMap);
+      //내부적으로 toString() 메서드를 호출
+      //${객체} = [object Map]
+      console.log(`personMap : ${personMap}`);
+      personMap.forEach((value, key) => {
+        //forEach사용
+        console.log(`${key} : ${value}`);
+      });
+    </script>
+  </body>
+</html>

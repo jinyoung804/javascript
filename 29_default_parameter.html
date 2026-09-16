@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./js/common.js"></script>
+    <script>
+      /*기본 함수매개변수
+        실무에서 많이 사용
+        매개변수가 존재하는 함수에서 실수로 매개변수를 전달하지 않는다면? 결과에 undefined가 출력된다 */
+      function sayHello(name = "아무개씨") {
+        if (name) {
+          //name이 있을 때만 alert 나와라
+          alert("Hello " + name + "!");
+        }
+      }
+      sayHello();
+      sayHello("홍길동");
+
+      console.log(getIntervalDateFormat2(2));
+    </script>
+  </body>
+</html>
