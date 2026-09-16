@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //scope: 변수가 영향력을 미치는 범위
+      /* 1. 함수 안에서 선언 => 함수 안에서만 접근 가능
+      2.  */
+      let carName = "벤츠";
+      function myFunction() {
+        let carName = "페라리";
+        console.log(carName);
+      }
+      myFunction();
+      console.log(carName); //함수 안에서 선언했기 때문에 carName이 정의되어있지 않다고 나옴
+    </script>
+  </body>
+</html>
