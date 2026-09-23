@@ -27,6 +27,50 @@
         //forEach사용
         console.log(`${key} : ${value}`);
       });
+      /* json-server 설치하기
+      npm json server 사이트로 이동 후 install과 usage 확인
+      구글에서 npm json server 검색 후 사이트로 이동, install과 usage 확인
+      bootcapm 폴더 아래에 json-server 폴더 생성,
+      터미널로 돌아와 cd json-server 로 경로 변경
+      터미널 창을 열고 c....\bootcamp\json-server > npm install -g json-server 명령어로 설치
+      json-server 에 db.json 파일을 작성
+      터미널에서 c....\bootcamp\json-server > npx json-server db.json 로 서버를 실행,
+      서버 동작 확인 
+      
+      cd javascript
+      cd json-server
+      npx json-server db.json
+
+
+      2. 서버와 클라이언트 통신
+        1. 동기통신 : 
+            HTTP통신 (동기 통신)
+              request(클라이언트) <-> response(서버)의 관계에서 응답이 오기 전까지 다른 프로그램 실행 불가
+              요청과 응답이 발생 시 화면의 refresh 작업이 발생, 깜빡이는 증상 발생
+        2. 비동기 통신 :
+            Ajax - Asynchronous Javascript and XML(비동기 통신)
+              request(클라이언트) <-> response(서버)의 동작 중에도 다른 프로그램 구동 가능
+              효율적, 화면 전체를 refresh 하지 않고 데이터를 전송하거나 받는 것이 가능
+              클라이언트와 서버가 데이터 통신을 하기 위해서 XMLHttpRequest 객체를 이용하여 구현
+              XMLHttpRequest객체를 이용하여 db.json 중 posts데이터 가져오기를 해보다
+
+              준비 메서드 : open
+
+
+              참고
+              XMLHttpRequest객체를 이용한 HTTP method 통신 절차
+              a. 객체 생성 const xhr = new XMLHttpRequest();
+              b. 요청을 보낼 준비 xhr.open("GET", "http://localhost:3000/posts");
+              c. 컨텐츠 타입 설정 xhr.setRequestHeader("content-type", "applcation/json");
+              d. 실제 요청 전송 xhr.send();
+              e. 응답이 오는 순간 동작하는 함수 onload() 작성
+                xhr.onload = () => {
+                if (xhr.status === 200){
+                  
+                }
+              }
+
+      */
     </script>
   </body>
 </html>
