@@ -7,6 +7,7 @@
   </head>
   <body>
     <script>
+      let url = "http://localhost:3000";
       //조회(GET, 200)
       const getPosts = () => {
         //1. 객체 생성
@@ -26,11 +27,10 @@
             console.log(result);
           } else {
             //통신 실패
-            console.log(xhr.status, xhr.statusText);
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
           }
         };
       };
-      getPosts();
 
       const getComments = () => {
         const xhr = new XMLHttpRequest();
@@ -42,12 +42,10 @@
             const result = JSON.parse(xhr.response);
             console.log(result);
           } else {
-            console.log(xhr.status, xhr.statusText);
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
           }
         };
       };
-
-      getComments();
 
       const getData = (path) => {
         const xhr = new XMLHttpRequest();
@@ -59,14 +57,98 @@
             const result = JSON.parse(xhr.response);
             console.log(result);
           } else {
-            console.log(xhr.status, xhr.statusText);
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
           }
         };
       };
 
+      //2. 생성(GET,201)
+      const postData = (target) => {
+        //1. 객체 생성
+        const xhr = new XMLHttpRequest();
+        //2. 준비 open()
+        xhr.open("POST", url + "/" + target);
+        //3. 컨텐트 타입 설정
+        xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+
+        const newData = { title: "kongES", views: 2000 };
+        //4. 전송 send()
+        xhr.send(JSON.stringify(newData));
+        //5. onload() 함수 생성
+        xhr.onload = () => {
+          if (xhr.status === 200 || xhr.status === 201) {
+            //통신 성공
+            //출력 => 핵심
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            //통신 실패
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
+          }
+        };
+      };
+      //2. 수정(PUT,200)
+      const putData = (target) => {
+        //1. 객체 생성
+        const xhr = new XMLHttpRequest();
+        //2. 준비 open()
+        xhr.open("PUT", url + "/" + target); //id
+        //3. 컨텐트 타입 설정
+        xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+
+        const putData = { title: "kongES", views: 150 };
+        //4. 전송 send()
+        xhr.send(JSON.stringify(putData));
+        //5. onload() 함수 생성
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            //통신 성공
+            //출력 => 핵심
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            //통신 실패
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
+          }
+        };
+      };
+      //2. 삭제(DELETE,200)
+      const deleteData = (target) => {
+        //1. 객체 생성
+        const xhr = new XMLHttpRequest();
+        //2. 준비 open()
+        xhr.open("DELETE", url + "/" + target); //id
+        //3. 컨텐트 타입 설정
+        xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+
+        //4. 전송 send()
+        xhr.send();
+        //5. onload() 함수 생성
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            //통신 성공
+            //출력 => 핵심
+            const result = xhr.response
+              ? JSON.parse(xhr.response)
+              : "삭제 완료";
+            console.log(result);
+          } else {
+            //통신 실패
+            console.log("삭제 실패(상태코드):", xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      // --- [테스트 방법] ---
+      // 1. 먼저 전체 데이터를 조회해보세요.
       getData("posts");
-      getData("comments");
-      getData("profile");
+
+      // 2. 존재하는 ID를 확인한 뒤 삭제 명령을 수행하세요 (예: id가 1이면 "posts/1")
+      // deleteData("posts/1");
+
+      /*단점
+      1. 비동기 방식 => send()를 하고 나서 response가 올 때까지 기다리지 않는다.
+      2. rendering하는데 약간의 제약이 있다.*/
     </script>
   </body>
 </html>
