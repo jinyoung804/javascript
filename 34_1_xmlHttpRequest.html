@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //조회(GET, 200)
+      const getPosts = () => {
+        //1. 객체 생성
+        const xhr = new XMLHttpRequest();
+        //2. 준비 open()
+        xhr.open("GET", "http://localhost:3000/posts");
+        //3. 컨텐트 타입 설정
+        xhr.setRequestHeader("content-type", "application/json");
+        //4. 전송 send()
+        xhr.send();
+        //5. onload() 함수 생성
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            //통신 성공
+            //출력 => 핵심
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            //통신 실패
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+      getPosts();
+
+      const getComments = () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:3000/comments");
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      getComments();
+
+      const getData = (path) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `http://localhost:3000/${path}`);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      getData("posts");
+      getData("comments");
+      getData("profile");
+    </script>
+  </body>
+</html>
