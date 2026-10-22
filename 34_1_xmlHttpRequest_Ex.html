@@ -10,56 +10,104 @@
     <h1>Posts 데이터 관리</h1>
     <div>
       <input type="text" id="inputId" placeholder="ID" />
-      <input type="text" id="innputTitle" placeholder="Title" />
+      <input type="text" id="inputTitle" placeholder="Title" />
       <input type="text" id="inputViews" placeholder="Views" />
     </div>
     <div>
-      <button id="btnRead()" onclick="getData()">조회</button>
-      <button id="btnCreate()" onclick="putData()">추가</button>
-      <button id="btnUpdate()" onclick="postData()">수정</button>
-      <button id="btnDelete()" onclick="deleteData()">삭제</button>
+      <button id="btnRead" onclick="getData()">조회</button>
+      <button id="btnCreate" onclick="postData()">추가</button>
+      <button id="btnUpdate" onclick="putData()">수정</button>
+      <button id="btnDelete" onclick="deleteData()">삭제</button>
     </div>
     <h2>데이터 목록</h2>
     <div id="postsLists"></div>
     <script>
-      /*
-      1.조회
-      2. 추가 input 데이터 없으면 팝업창으로 띄우기
-      3. 수정
-      4. 삭제 input 데이터 없으면 팝업창으로 띄우기
-      5. 렌더링 조회,추가,수정에서 : text, ul, table...=> push,josin
-      6. 추가함수 : 자유롭게
-
-      ID: Title: Views:
-      */
-
       let url = "http://localhost:3000";
-      //조회(GET, 200)
-      const getPosts = () => {
-        //1. 객체 생성
+
+      // 조회
+      const getData = () => {
         const xhr = new XMLHttpRequest();
-        //2. 준비 open()
-        xhr.open("GET", "http://localhost:3000/posts");
-        //3. 컨텐트 타입 설정
+        xhr.open("GET", url + "/posts");
         xhr.setRequestHeader("content-type", "application/json");
-        //4. 전송 send()
         xhr.send();
-        //5. onload() 함수 생성
+
         xhr.onload = () => {
           if (xhr.status === 200) {
-            //통신 성공
-            //출력 => 핵심
             const result = JSON.parse(xhr.response);
-            //렌더링함수
-            function render=() => {
-              document.getElementById('').
-            }
+            render(result);
           } else {
-            //통신 실패
+            console.log("조회실패: ", xhr.status);
+          }
+        };
+      };
+
+      const render = (data) => {
+        let html = "";
+        data.forEach((post) => {
+          html += `<p>ID: ${post.id} | Title: ${post.title} | Views: ${post.views}</p>`;
+        });
+        document.getElementById("postsLists").innerHTML = html;
+      };
+
+      // 추가
+      const postData = () => {
+        const id = document.getElementById("inputId").value;
+        const title = document.getElementById("inputTitle").value;
+        const views = document.getElementById("inputViews").value;
+
+        if (title === "" || views === "") {
+          alert("데이터를 모두 입력해주세요");
+          return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        // target 변수 대신 "/posts" 경로 지정
+        xhr.open("POST", url + "/posts");
+        // content-type 세미콜론 제거
+        xhr.setRequestHeader("content-type", "application/json");
+
+        const newData = { id: id, title: title, views: Number(views) };
+        xhr.send(JSON.stringify(newData));
+
+        xhr.onload = () => {
+          if (xhr.status === 200 || xhr.status === 201) {
+            const result = JSON.parse(xhr.response);
+            console.log("추가 성공:", result);
+            getData(); // 목록 새로고침
+          } else {
             console.log("실패 상태코드:", xhr.status, xhr.statusText);
           }
         };
       };
+
+      //수정
+
+      const putData = () => {
+        const id = document.getElementById("inputId").value;
+        const title = document.getElementById("inputTitle").value;
+        const views = document.getElementById("inputViews").value;
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("PUT", url + "/posts/" + id); //id
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        const putData = { title: title, views: 150 };
+
+        xhr.send(JSON.stringify(putData));
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            console.log("수정 성공:", JSON.parse(xhr.response));
+            getData();
+          } else {
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      /*추가 : 추가와 동시에 input clear
+      수정 : 덮어쓰기*/
     </script>
   </body>
 </html>
