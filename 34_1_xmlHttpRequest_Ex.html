@@ -21,6 +21,45 @@
     </div>
     <h2>데이터 목록</h2>
     <div id="postsLists"></div>
-    <script></script>
+    <script>
+      /*
+      1.조회
+      2. 추가 input 데이터 없으면 팝업창으로 띄우기
+      3. 수정
+      4. 삭제 input 데이터 없으면 팝업창으로 띄우기
+      5. 렌더링 조회,추가,수정에서 : text, ul, table...=> push,josin
+      6. 추가함수 : 자유롭게
+
+      ID: Title: Views:
+      */
+
+      let url = "http://localhost:3000";
+      //조회(GET, 200)
+      const getPosts = () => {
+        //1. 객체 생성
+        const xhr = new XMLHttpRequest();
+        //2. 준비 open()
+        xhr.open("GET", "http://localhost:3000/posts");
+        //3. 컨텐트 타입 설정
+        xhr.setRequestHeader("content-type", "application/json");
+        //4. 전송 send()
+        xhr.send();
+        //5. onload() 함수 생성
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            //통신 성공
+            //출력 => 핵심
+            const result = JSON.parse(xhr.response);
+            //렌더링함수
+            function render=() => {
+              document.getElementById('').
+            }
+          } else {
+            //통신 실패
+            console.log("실패 상태코드:", xhr.status, xhr.statusText);
+          }
+        };
+      };
+    </script>
   </body>
 </html>
