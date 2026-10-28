@@ -51,28 +51,36 @@
 
       // 추가
       const postData = () => {
-        const id = document.getElementById("inputId").value;
-        const title = document.getElementById("inputTitle").value;
-        const views = document.getElementById("inputViews").value;
+        const id = document.getElementById("inputId");
+        const title = document.getElementById("inputTitle");
+        const views = document.getElementById("inputViews");
 
-        if (title === "" || views === "") {
+        //유효성
+        if (title.value === "" || views.value === "") {
           alert("데이터를 모두 입력해주세요");
           return;
         }
 
         const xhr = new XMLHttpRequest();
-        // target 변수 대신 "/posts" 경로 지정
+
         xhr.open("POST", url + "/posts");
-        // content-type 세미콜론 제거
+
         xhr.setRequestHeader("content-type", "application/json");
 
-        const newData = { id: id, title: title, views: Number(views) };
+        const newData = {
+          id: id.value,
+          title: title.value,
+          views: views.value,
+        };
         xhr.send(JSON.stringify(newData));
 
         xhr.onload = () => {
           if (xhr.status === 200 || xhr.status === 201) {
             const result = JSON.parse(xhr.response);
             console.log("추가 성공:", result);
+            id.value = "";
+            title.value = "";
+            views.value = "";
             getData(); // 목록 새로고침
           } else {
             console.log("실패 상태코드:", xhr.status, xhr.statusText);
@@ -81,24 +89,33 @@
       };
 
       //수정
-
       const putData = () => {
-        const id = document.getElementById("inputId").value;
-        const title = document.getElementById("inputTitle").value;
-        const views = document.getElementById("inputViews").value;
+        const id = document.getElementById("inputId");
+        const title = document.getElementById("inputTitle");
+        const views = document.getElementById("inputViews");
+
+        //유효성
+        if (views.value === "") {
+          alert("데이터를 모두 입력해주세요");
+          return;
+        }
+
         const xhr = new XMLHttpRequest();
 
         xhr.open("PUT", url + "/posts/" + id); //id
 
         xhr.setRequestHeader("content-type", "application/json");
 
-        const putData = { title: title, views: 150 };
+        const putData = { title: title.value, views: views.value };
 
         xhr.send(JSON.stringify(putData));
 
         xhr.onload = () => {
           if (xhr.status === 200) {
             console.log("수정 성공:", JSON.parse(xhr.response));
+            id.value = "";
+            title.value = "";
+            views.value = "";
             getData();
           } else {
             console.log("실패 상태코드:", xhr.status, xhr.statusText);
